@@ -1,39 +1,75 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { FaSearch } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
-const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+export default function Header() {
+  const { currentUser } = useSelector((state) => state.user);
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('searchTerm', searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
 
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get('searchTerm');
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [location.search]);
   return (
-    <header className='bg-yellow-200 h-18 w-full font-mono border-black rounded-b-2xl border-2 fixed'>
-      <div className='flex justify-between items-center'>
-        <h1 className='text-2xl ml-4 flex flex-col'>
-          <span className='text-red-500'>Riyal-</span>
-          <span className='text-green-500 ml-10'>Estate</span>
-        </h1>
-        <input type='text' placeholder='Search' className=' md:h-12 md:w-80 rounded-lg mt-1 pl-4 h-10 w-44 bg-yellow-50' />
-        <div className='md:hidden mr-4'>
-          <button className='text-4xl' onClick={() => setMenuOpen(!menuOpen)}>= </button>
-        </div>
-        <div className={`hidden text-xl space-x-5 justify-end mr-4 md:flex`}>
-          <Link to="/">Home</Link>
-          <Link to="/About">About</Link>
-          <Link to="/Signin">Signin</Link>
-          <Link to="/SignUp">SignUp</Link>
-          <Link to="/Profile">Profile</Link>
-        </div>
+    <header className='bg-slate-200 shadow-md'>
+      <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
+        <Link to='/'>
+          <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
+            <span className='text-slate-500'>Sahand</span>
+            <span className='text-slate-700'>Estate</span>
+          </h1>
+        </Link>
+        <form
+          onSubmit={handleSubmit}
+          className='bg-slate-100 p-3 rounded-lg flex items-center'
+        >
+          <input
+            type='text'
+            placeholder='Search...'
+            className='bg-transparent focus:outline-none w-24 sm:w-64'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button>
+            <FaSearch className='text-slate-600' />
+          </button>
+        </form>
+        <ul className='flex gap-4'>
+          <Link to='/'>
+            <li className='hidden sm:inline text-slate-700 hover:underline'>
+              Home
+            </li>
+          </Link>
+          <Link to='/about'>
+            <li className='hidden sm:inline text-slate-700 hover:underline'>
+              About
+            </li>
+          </Link>
+          <Link to='/profile'>
+            {currentUser ? (
+              <img
+                className='rounded-full h-7 w-7 object-cover'
+                src={currentUser.avatar}
+                alt='profile'
+              />
+            ) : (
+              <li className=' text-slate-700 hover:underline'> Sign in</li>
+            )}
+          </Link>
+        </ul>
       </div>
-      {menuOpen && (
-        <div className='flex flex-col  space-y-2 items-end pr-10 w-full md:hidden bg-yellow-200'>
-          <Link to="/" onClick={() => setMenuOpen(false)}className='hover:text-red-500 hover:underline'>Home</Link>
-          <Link to="/About" onClick={() => setMenuOpen(false)}className='hover:text-red-500 hover:underline'>About</Link>
-          <Link to="/Signin" onClick={() => setMenuOpen(false)}className='hover:text-red-500 hover:underline'>Signin</Link>
-          <Link to="/SignUp" onClick={() => setMenuOpen(false)}className='hover:text-red-500 hover:underline'>SignUp</Link>
-          <Link to="/Profile" onClick={() => setMenuOpen(false)} className='hover:text-red-500 hover:underline'>Profile</Link>
-        </div>
-      )}
     </header>
   );
-};
-
-export default Header;
+}

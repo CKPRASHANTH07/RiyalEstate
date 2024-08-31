@@ -1,24 +1,38 @@
-import { BrowserRouter,Routes,Route } from "react-router-dom"
-import Signin from "./pages/Signin"
-import SignUp from "./pages/SignUp"
-import Profile from "./pages/Profile"
-import About from "./pages/About"
-import Header from "./components/Header"
-import Home from "./pages/Home";
-const App = () => {
+import Header from './components/Header';  // Adjust the path as needed
+import PrivateRoute from './components/PrivateRoute';  // Adjust the path as needed
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import SignIn from './pages/Signin';
+import SignUp from './pages/SignUp';
+import About from './pages/About';
+import Search from './pages/Search';
+import Listing from './pages/Listing';
+import Profile from './pages/Profile';
+import CreateListing from './pages/CreateListing';
+import UpdateListing from './pages/UpdateListing'; 
+
+
+export default function App() {
   return (
     <BrowserRouter>
-    <Header />
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/Signin" element={<Signin />} />
-      <Route path="/SignUp" element={<SignUp />} />
-      <Route path="/Profile" element={<Profile />} />
-      <Route path="/About" element={<About />} />
+      <Header />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/sign-in' element={<SignIn />} />
+        <Route path='/sign-up' element={<SignUp />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/search' element={<Search />} />
+        <Route path='/listing/:listingId' element={<Listing />} />
 
-    </Routes>
+        <Route element={<PrivateRoute />}>
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/create-listing' element={<CreateListing />} />
+          <Route
+            path='/update-listing/:listingId'
+            element={<UpdateListing />}
+          />
+        </Route>
+      </Routes>
     </BrowserRouter>
-  )
+  );
 }
-
-export default App
