@@ -46,29 +46,24 @@ export default function Home() {
     fetchOfferListings();
   }, []);
   return (
-    <div>
+    <div className=''>
       {/* top */}
-      <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto'>
-        <h1 className='text-slate-700 font-bold text-3xl lg:text-6xl'>
-          Find your next <span className='text-slate-500'>perfect</span>
-          <br />
-          place with ease
+      <div className='flex flex-col gap-6 p-28 pt-52 px-3 max-w-6xl mx-auto items-center '>
+        <h1 className='text-[#2a45ba]  font-bold text-3xl lg:text-6xl text-center'>
+        Discover your ideal location <span className='text-[#ffc200]'> effortlessly </span>
+          with complete confidence
         </h1>
-        <div className='text-gray-400 text-xs sm:text-sm'>
-          Sahand Estate is the best place to find your next perfect place to
-          live.
-          <br />
-          We have a wide range of properties for you to choose from.
+        <div className='text-black text-xs sm:text-sm sm:max-w-[800px] text-center px-5'>
+        RiyalEstate is your ultimate destination for finding the ideal place to call home. We offer an extensive selection of properties, ensuring you have a diverse range of options to choose from to perfectly match your living preferences and needs
         </div>
         <Link
           to={'/search'}
-          className='text-xs sm:text-sm text-blue-800 font-bold hover:underline'
+          className=' sm:text-sm hover:text-xl bg-red-700 font-bold hover:bg-red-500  shadow-2xl duration-500 text-white p-4 rounded-2xl'
         >
-          Let's get started...
+          Let's get started
         </Link>
       </div>
-
-      {/* swiper */}
+      
       <Swiper navigation>
         {offerListings &&
           offerListings.length > 0 &&
