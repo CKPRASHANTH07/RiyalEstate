@@ -5,6 +5,9 @@ import { Navigation } from 'swiper/modules';
 import SwiperCore from 'swiper';
 import 'swiper/css/bundle';
 import ListingItem from '../components/ListingItem';
+import image from '../assets/handbuild.jpg';
+import search from '../assets/search.jpg';
+import mission from '../assets/mission.jpg';
 
 export default function About() {
   const [offerListings, setOfferListings] = useState([]);
@@ -55,11 +58,11 @@ export default function About() {
             <div className="2xl:pl-16">
                 <h2 className="text-3xl font-bold my-5 leading-tight text-white sm:text-4xl lg:text-5xl lg:leading-tight">Our Mission & Vision</h2>
                 <p className="text-xl leading-relaxed text-white mt-2 mb-8">Our mission is simple: to simplify real estate transactions and make property searches accessible, transparent, and efficient for everyone. Riyal Estate is designed to cater to all your real estate needs with ease and confidence</p>
-                <p className="text-xl leading-relaxed text-white mt-2">We envision a future where property transactions are streamlined and hassle-free, backed by technology and expert guidance. Riyal Estate aims to be the go-to platform for anyone looking to navigate the real estate market</p>
+                <p className="text-xl leading-relaxed text-black mt-2">We envision a future where property transactions are streamlined and hassle-free, backed by technology and expert guidance. Riyal Estate aims to be the go-to platform for anyone looking to navigate the real estate market</p>
                  </div>
-            <div className="relative lg:mb-12">
+            <div className="relative lg:mb-12 pt-32">
                 <div className="pl-12 pr-6">
-                    <img className="relative" src="https://cdn.rareblocks.xyz/collection/celebration/images/content/3/girl-working-on-laptop.jpg" alt="" />
+                    <img className="relative rounded-2xl py-10" src={mission} alt="" />
                 </div>
             </div>
         </div>
@@ -70,7 +73,7 @@ export default function About() {
         <div className="grid items-center grid-cols-1 lg:grid-cols-2 gap-x-12 xl:gap-x-24 gap-y-12">
             <div className="relative lg:mb-12">
                 <div className="pl-12 pr-6">
-                    <img className="relative" src="https://cdn.rareblocks.xyz/collection/celebration/images/content/3/girl-working-on-laptop.jpg" alt="" />
+                    <img className="relative rounded-2xl" src={image} alt="" />
                 </div>
                 
             </div>
@@ -91,7 +94,7 @@ export default function About() {
             </div>
             <div className="relative lg:mb-12">
                 <div className="pl-12 pr-6">
-                    <img className="relative" src="https://cdn.rareblocks.xyz/collection/celebration/images/content/3/girl-working-on-laptop.jpg" alt="" />
+                    <img className="relative rounded-2xl" src={search} alt="" />
                 </div>
                 
             </div>
